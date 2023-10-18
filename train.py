@@ -1,6 +1,7 @@
 from ultralytics import YOLO
 import mlflow
 
+#to use model, get it from luxonis tool at http://tools.luxonis.com/
 def main():
     mlflow.autolog()
 
