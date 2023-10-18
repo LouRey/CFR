@@ -21,7 +21,7 @@ pipeline = depthai.Pipeline()
 # the mobilenet-ssd input size (which we will define later)
 
 cam_rgb = pipeline.create(depthai.node.ColorCamera)
-cam_rgb.setPreviewSize(300, 300)
+cam_rgb.setPreviewSize(640, 640)
 cam_rgb.setInterleaved(False)
 
 #define a MobileNetDetectionNetwork node with mobilenet-ssd network. 
