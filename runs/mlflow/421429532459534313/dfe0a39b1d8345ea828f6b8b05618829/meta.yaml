@@ -1,0 +1,15 @@
+artifact_uri: file:///A:/Bureau/Robot/plant_detector/runs/mlflow/421429532459534313/dfe0a39b1d8345ea828f6b8b05618829/artifacts
+end_time: 1697747372805
+entry_point_name: ''
+experiment_id: '421429532459534313'
+lifecycle_stage: active
+run_id: dfe0a39b1d8345ea828f6b8b05618829
+run_name: train17
+run_uuid: dfe0a39b1d8345ea828f6b8b05618829
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1697721075266
+status: 3
+tags: []
+user_id: louis
