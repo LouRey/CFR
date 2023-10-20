@@ -21,7 +21,8 @@ pipeline = depthai.Pipeline()
 # the mobilenet-ssd input size (which we will define later)
 
 cam_rgb = pipeline.create(depthai.node.ColorCamera)
-cam_rgb.setPreviewSize(640, 640)
+cam_rgb.setPreviewSize(300, 300)
+#cam_rgb.setPreviewSize(640, 640)
 cam_rgb.setInterleaved(False)
 
 #define a MobileNetDetectionNetwork node with mobilenet-ssd network. 
@@ -30,13 +31,13 @@ cam_rgb.setInterleaved(False)
 # With this node, the output from nn will be parsed on device side and we’ll receive a ready to use detection objects. 
 # For this to work properly, we need also to set the confidence threshold to filter out the incorrect results
 
-#detection_nn = pipeline.create(depthai.node.MobileNetDetectionNetwork)
-detection_nn = pipeline.create(depthai.node.YoloDetectionNetwork)
+detection_nn = pipeline.create(depthai.node.MobileNetDetectionNetwork)
+#detection_nn = pipeline.create(depthai.node.YoloDetectionNetwork)
 
 # Set path of the blob (NN model). We will use blobconverter to convert&download the model
 # detection_nn.setBlobPath("/path/to/model.blob")
-#detection_nn.setBlobPath(blobconverter.from_zoo(name='mobilenet-ssd', shaves=6))
-detection_nn.setBlobPath("./last_model/best_openvino_2022.1_6shave.blob")
+detection_nn.setBlobPath(blobconverter.from_zoo(name='mobilenet-ssd', shaves=6))
+#detection_nn.setBlobPath("./last_model/best_openvino_2022.1_6shave.blob")
 
 detection_nn.setConfidenceThreshold(0.5)
 
@@ -92,7 +93,18 @@ with depthai.Device(pipeline) as device:
             for detection in detections:
                 print(detection)
                 bbox = frameNorm(frame, (detection.xmin, detection.ymin, detection.xmax, detection.ymax))
-                cv2.rectangle(frame, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (255, 0, 0), 2)
+                #cv2.rectangle(frame, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (255, 0, 0), 2)
+                #Define the center and radius of the point
+                point_center = (int((bbox[2] + bbox[0])/2), int((bbox[3] + bbox[1])/2))  # Replace with the coordinates where you want to draw the point
+                print(point_center)
+                radius = 5  # Adjust the radius to control the size of the point
+
+                # Define the color of the point (BGR format)
+                color = (0, 0, 255)  # Red in BGR
+
+                # Draw the point on the image
+                cv2.circle(frame, point_center, radius, color, -1)  # -1 means to fill the circle
+
                 # print('=' * 50)
                 # print(detection.label)
 
